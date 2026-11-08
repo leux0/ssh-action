@@ -14,7 +14,7 @@ jobs:
 
       - name: Start SSH via Ngrok
         if: ${{ failure() }}
-        run: curl -sL https://github.com/leux0/ssh-action/raw/refs/heads/main/debug-github-actions.sh | bash
+        run: curl -sL https://github.com/leux0/ssh-action/raw/refs/heads/main/ngrok.sh | bash
         env:
           # After sign up on the https://ngrok.com/
           # You can find this token here: https://dashboard.ngrok.com/get-started/setup
@@ -24,4 +24,4 @@ jobs:
 
       - name: Don't kill instace
         if: ${{ failure() }}
-        run: sleep 1h # Prevent to killing instance after failure
+        run: sleep 6h # Prevent to killing instance after failure
