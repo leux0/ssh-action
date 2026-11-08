@@ -1,4 +1,4 @@
-name: SSH To Actions
+name: SSH To Actions With Ngrok
 
 on: 
     workflow_dispatch:
