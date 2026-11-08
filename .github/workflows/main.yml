@@ -1,5 +1,7 @@
 name: Remote SSH Command
+
 on: [push]
+
 jobs:
   build:
     name: Build
@@ -11,5 +13,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: 10010
-          script: whoami
+          port: ${{ secrets.PORT }}
+          script: |
+            #!/usr/bin/env bash
+            set -e
+            whoami
