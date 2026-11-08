@@ -6,8 +6,8 @@ if [[ -z "$NGROK_TOKEN" ]]; then
   exit 2
 fi
 
-if [[ -z "$USER_PASS" ]]; then
-  echo "Please set 'USER_PASS' for user: $USER"
+if [[ -z "$USER_PASSWD" ]]; then
+  echo "Please set 'USER_PASSWD' for user: $USER"
   exit 3
 fi
 
@@ -17,7 +17,7 @@ curl -fsSL https://bin.ngrok.com/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz |
 chmod +x ./ngrok
 
 echo "### Update user: $USER password ###"
-echo -e "$USER_PASS\n$USER_PASS" | sudo passwd "$USER"
+echo -e "$USER_PASSWD\n$USER_PASSWD" | sudo passwd "$USER"
 
 echo "### Start ngrok proxy for 22 port ###"
 
