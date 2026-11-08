@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Try Build
+        run: ./not-exist-file.sh it bloke build
+
       - name: Start SSH via Ngrok
         if: ${{ failure() }}
         run: curl -sL https://github.com/leux0/ssh-action/raw/refs/heads/main/debug-github-actions.sh | bash
