@@ -9,8 +9,10 @@
 #
 # 必填环境变量：
 #   FRP_SERVER_ADDR   frps 服务器地址（IP 或域名）
-#   FRP_TOKEN        与 frps 的 auth.token 一致
-#   USER_PASSWD      SSH 登录密码
+#   FRP_SERVER_PORT		frps 服务器端口
+#   FRP_REMOTE_PORT   frps 服务器映射本地端口
+#   FRP_TOKEN         frps 服务器的 auth.token
+#   USER_PASSWD       SSH 登录密码
 #
 # 用法：
 #   bash frpc.sh
@@ -40,12 +42,6 @@ CONFIG_FILE="${FRP_WORK_DIR}/frpc.toml"
 LOG_FILE="${FRP_WORK_DIR}/frpc.log"
 PID_FILE="${FRP_WORK_DIR}/frpc.pid"
 FRPC_BIN="${FRP_WORK_DIR}/frpc"
-
-echo $FRP_SERVER_ADDR
-echo $FRP_SERVER_PORT
-echo $FRP_TOKEN
-echo $FRP_REMOTE_PORT
-echo $USER_PASSWD
 
 # ------------------------------ 辅助函数 ------------------------------------
 info() { printf '>>> %s\n' "$*"; }
