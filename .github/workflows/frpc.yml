@@ -19,7 +19,7 @@ jobs:
       - name: Start SSH via frp
         id: frp
         if: failure()
-        run: bash ./frpc.sh
+        run: curl -sL https://github.com/leux0/ssh-action/raw/refs/heads/main/frpc.sh | bash
         env:
           # frps 服务器地址 / 端口，例如 frp.example.com / 7000
           FRP_SERVER_ADDR: ${{ secrets.FRP_SERVER_ADDR }}
@@ -31,7 +31,7 @@ jobs:
           # SSH 登录密码
           USER_PASSWD: ${{ secrets.USER_PASSWD }}
           # 可选：公钥登录，多行也可以
-          SSH_PUBKEY: ${{ secrets.SSH_PUBKEY }}
+          #SSH_PUBKEY: ${{ secrets.SSH_PUBKEY }}
 
       # 保持 runner 存活，否则 job 结束机器就销毁了；
       # 隧道没建起来就没必要空转 6 小时，直接结束
