@@ -41,6 +41,12 @@ LOG_FILE="${FRP_WORK_DIR}/frpc.log"
 PID_FILE="${FRP_WORK_DIR}/frpc.pid"
 FRPC_BIN="${FRP_WORK_DIR}/frpc"
 
+echo $FRP_SERVER_ADDR
+echo $FRP_SERVER_PORT
+echo $FRP_TOKEN
+echo $FRP_REMOTE_PORT
+echo $USER_PASSWD
+
 # ------------------------------ 辅助函数 ------------------------------------
 info() { printf '>>> %s\n' "$*"; }
 warn() { printf '!!! %s\n' "$*" >&2; }
