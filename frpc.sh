@@ -9,7 +9,7 @@
 #
 # 必填环境变量：
 #   FRP_SERVER_ADDR   frps 服务器地址（IP 或域名）
-#   FRP_SERVER_PORT		frps 服务器端口
+#   FRP_SERVER_PORT   frps 服务器端口
 #   FRP_REMOTE_PORT   frps 服务器映射本地端口
 #   FRP_TOKEN         frps 服务器的 auth.token
 #   USER_PASSWD       SSH 登录密码
