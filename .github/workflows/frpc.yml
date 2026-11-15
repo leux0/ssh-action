@@ -1,0 +1,40 @@
+name: SSH To Actions With FRPC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360 # GitHub 托管 runner 单 job 上限为 6 小时
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 故意让这一步失败，后面的步骤才会进入 failure() 分支，
+      # 用来模拟"构建失败后需要进机器排查"的场景（与原 ngrok 版一致）。
+      - name: Try Build
+        run: ./not-exist-file.sh it bloke build
+
+      - name: Start SSH via frp
+        id: frp
+        if: failure()
+        run: bash ./frpc.sh
+        env:
+          # frps 服务器地址 / 端口，例如 frp.example.com / 7000
+          FRP_SERVER_ADDR: ${{ secrets.FRP_SERVER_ADDR }}
+          FRP_SERVER_PORT: ${{ secrets.FRP_SERVER_PORT }}
+          # 与 frps.toml 里 auth.token 完全一致
+          FRP_TOKEN: ${{ secrets.FRP_TOKEN }}
+          # 公网上的 SSH 端口（frps 所在机器要放行这个端口）
+          FRP_REMOTE_PORT: ${{ secrets.FRP_REMOTE_PORT }}
+          # SSH 登录密码
+          USER_PASSWD: ${{ secrets.USER_PASSWD }}
+          # 可选：公钥登录，多行也可以
+          SSH_PUBKEY: ${{ secrets.SSH_PUBKEY }}
+
+      # 保持 runner 存活，否则 job 结束机器就销毁了；
+      # 隧道没建起来就没必要空转 6 小时，直接结束
+      - name: Keep the runner alive
+        if: failure() && steps.frp.outcome == 'success'
+        run: sleep 6h
