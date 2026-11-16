@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 360 # GitHub 托管 runner 单 job 上限为 6 小时
     steps:
       - name: Checkout
